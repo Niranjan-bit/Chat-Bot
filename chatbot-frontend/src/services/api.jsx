@@ -1,17 +1,13 @@
 import axios from "axios";
 
-const API_URL = "https://thechatbot.onrender.com/api/qna/ask";
+const API_URL = import.meta.env.VITE_API_URL; // ✅ Correct way to access .env variables in Vite
 
 export const fetchChatResponse = async (question) => {
     try {
-        const response = await axios.post(
-            API_URL,
-            { question }, 
-            { headers: { "Content-Type": "application/json" } }
-        );
+        const response = await axios.post(API_URL, { question });
         return response.data;
     } catch (error) {
-        console.error("Error fetching response:", error);
+        console.error(error);
         throw error;
     }
 };
